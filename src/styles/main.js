@@ -24,7 +24,8 @@ export const main = StyleSheet.create({
         fontSize: COMMON.FONT_SIZES.text,
         lineHeight: COMMON.FONT_LINE_HEIGHTS.text,
         textAlign: 'center',
-        fontFamily: COMMON.FONT_NORMAL
+        fontFamily: COMMON.FONT_LIGHT,
+        marginTop: 5
     },
     button: {
         borderRadius: 100,
@@ -69,5 +70,51 @@ export const brin = StyleSheet.create({
         backgroundColor: 'rgba(58,186,255,0.85)',
         paddingVertical: 36,
         paddingHorizontal: 26
+    }
+});
+
+export const start = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 30,
+        paddingBottom: 36,
+        paddingHorizontal: 15
+    },
+    box: {
+        backgroundColor: 'rgba(58,186,255,0.9)',
+        borderColor: '#ffffff',
+        borderWidth: 4,
+        paddingTop: 10,
+        paddingBottom: 20,
+        paddingHorizontal: 15,
+        marginBottom: 20,
+        borderBottomRightRadius: 8
+    },
+    textKomika: {
+        fontSize: 23,
+        fontFamily: COMMON.FONT_KOMIKA,
+        lineHeight: 40,
+        color: '#ffffff',
+        textAlign: 'center',
+    },
+    timerContainer: {
+
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    timerText: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: '#ffffff'
+    },
+    timerBox: {
+        backgroundColor: '#fff',
+        fontFamily: COMMON.FONT_LIGHT,
+        color: COMMON.COLORS.blue,
+        fontSize: 31,
+        borderRadius: 12,
+        paddingVertical: 5,
+        paddingHorizontal: 7
     }
 });

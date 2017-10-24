@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Main, Start } from './containers';
 import { Provider } from 'react-redux';
+
 import { store } from './store';
+import { StartStack, MainStack } from "./constans/routes";
 
 export class Root extends Component {
     constructor() {
@@ -11,20 +12,16 @@ export class Root extends Component {
         };
     }
 
-    startApp = () => {
-        this.setState({ started: true });
-    }
-
     renderRoot(ComponentToRender) {
         return (
             <Provider store={store}>
-                <ComponentToRender onStartApp={this.startApp} />
+                <ComponentToRender />
             </Provider>
         );
     }
 
     render() {
         const { started } = this.state;
-        return started ? this.renderRoot(Main) : this.renderRoot(Start);
+        return started ? this.renderRoot(MainStack) : this.renderRoot(StartStack);
     }
 }

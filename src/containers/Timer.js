@@ -5,13 +5,13 @@ import { Text, View } from 'react-native';
 import * as styles from '../styles/main';
 import { Background } from "./Background";
 
-export class Start extends Component {
+export class Timer extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const {navigate} = this.props.navigation;
+        const {state} = this.props.navigation;
 
         return(
             <Background>
@@ -19,19 +19,24 @@ export class Start extends Component {
                     <View style={{flex: 1}}>
                         <View style={styles.start.box}>
                             <Text style={styles.main.title}>Kraanwaterdag 2017</Text>
-                            <Text style={styles.main.text}>Doe de kraanwaterdag-quiz via het digibord (de link is verstuurd per e-mail) en speel daarna via deze app de Diep Onder de Grond-challenge met jouw klas!</Text>
+                            <Text style={styles.main.text}>Op woensdag 29 november is het zo ver: Kraanwaterdag! Speel de educatieve Kraanwater-quiz op het digibord en ga daarna op het schoolplein op zoek naar toffe prijzen, tijdens de Diep Onder de Grond-challenge!</Text>
                         </View>
                         <View style={styles.start.box}>
                             <View style={{paddingVertical: 10}}>
-                                <Text style={styles.start.textKomika}>Het is vandaag</Text>
-                                <Text style={styles.start.textKomika}>kraanwaterdag!</Text>
+                                <View style={styles.start.timerContainer}>
+                                    <Text style={styles.start.timerText}>over...   </Text>
+                                    <Text style={styles.start.timerBox}>{state.params.date}</Text>
+                                    <Text style={styles.start.timerText}>   dagen</Text>
+                                </View>
+                                <Text style={styles.main.text}>is het Kraanwaterdag</Text>
                             </View>
                         </View>
                     </View>
                     <View style={{paddingTop: 34, paddingHorizontal: 11}}>
                         <Button
-                            onPress={() => navigate('Welcome')}
+                            isDisabled={true}
                             style={styles.main.button}
+                            disabledStyle={styles.main.buttonDisable}
                             textStyle={styles.main.buttonText}
                             children={'Volgende'}
                         />

@@ -1,4 +1,4 @@
-export { Start } from './Start';
-export { Main } from './Main';
-export { BRINInput } from './BRINInput';
+export { LocationInput } from './LocationInput';
 export { Welcome } from './Welcome';
+export { Start } from './Start';
+export { Timer } from './Timer';
