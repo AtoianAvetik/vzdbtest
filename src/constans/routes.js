@@ -5,17 +5,15 @@ import getSlideFromRightTransition from 'react-navigation-slide-from-right-trans
 import { TopBar } from "../ui";
 import { Welcome } from '../containers/Welcome';
 import { LocationInput } from '../containers/LocationInput';
-import { Start } from '../containers/Start';
-import { Timer } from '../containers/Timer';
+import { StartScreen } from '../containers/StartScreen';
 import { TopBarButton } from '../ui';
 
 export const StartStack = StackNavigator(
     {
         Welcome: {screen: Welcome},
         LocationInput: {screen: LocationInput},
-        Start: {screen: Start},
-        Timer: {
-            screen: Timer,
+        StartScreen: {
+            screen: StartScreen,
             navigationOptions: {
                 headerRight : <TopBarButton />
             }

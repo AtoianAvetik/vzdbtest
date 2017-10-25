@@ -12,8 +12,7 @@ export class LocationInput extends Component {
 
         this.state = {
             eventDate: new Date('2017-11-29'),
-            daysLeft: 0,
-            navigate: 'Timer'
+            daysLeft: 0
         };
 
     }
@@ -24,14 +23,7 @@ export class LocationInput extends Component {
                 const currentDate = Date.parse(data.date.toString());
                 const daysLeft = this.calculateDaysLeft(currentDate);
                 this.setState({daysLeft});
-                if ( daysLeft < 0 ) {
-                    this.setState({navigate: 'Start'})
-                }
             })
-    }
-
-    onNavigate() {
-        this.props.navigation.navigate(this.state.navigate, {date: this.state.daysLeft});
     }
 
     calculateDaysLeft(currentDate) {
@@ -40,26 +32,29 @@ export class LocationInput extends Component {
     }
 
     render() {
+        const {navigate} = this.props.navigation;
+
         return(
             <Background>
                 <View style={styles.brin.container}>
                     <View>
                         <Text style={styles.main.title}>
-                            Vul hier je BRIN-nummer in
+                            Vul hier je Vestigings-nummer in
                         </Text>
                     </View>
                     <View style={{flex: 1}}>
                         <View style={styles.main.inputContainer}>
                             <TextInput
                                 underlineColorAndroid='transparent'
-                                placeholder={' 12AB00'}
+                                placeholder={' Vestigings-nummer'}
                                 placeholderTextColor={'#DADADA'}
+                                maxLength={6}
                                 style={styles.main.input} />
                         </View>
                     </View>
                     <View style={{paddingTop: 30}}>
                         <Button
-                            onPress={this.onNavigate.bind(this)}
+                            onPress={() => navigate('StartScreen', {daysLeft: this.state.daysLeft})}
                             style={styles.main.button}
                             disabledStyle={styles.main.buttonDisable}
                             textStyle={styles.main.buttonText}
