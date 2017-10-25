@@ -1,4 +1,4 @@
-import * as types from '../constans/actionTypes';
+import * as types from '../constants/actionTypes';
 
 export const ui = (state = {
     activeTab: 0,

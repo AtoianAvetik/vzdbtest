@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import Button from 'apsl-react-native-button';
 import { View } from 'react-native';
+import { connect } from 'react-redux'
 
 import * as styles from '../styles/main';
 import { Background } from "./Background";
 import { Timer } from "../components/Timer";
 import { Start } from "../components/Start";
 
-export class StartScreen extends Component {
+class _StartScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            started: false,
-            daysLeft: 0
+            started: false
         };
     }
 
     componentWillMount() {
-        const daysLeft = this.props.navigation.state.params.daysLeft;
-        const started = daysLeft < 0;
-        this.setState({started, daysLeft})
+        const started = this.props.daysLeft < 0;
+        this.setState({started});
     }
 
     renderRoot(ComponentToRender) {
@@ -28,10 +27,10 @@ export class StartScreen extends Component {
         return (
             <Background>
                 <View style={styles.start.container}>
-                    <ComponentToRender daysLeft={this.state.daysLeft}/>
+                    <ComponentToRender daysLeft={this.props.daysLeft}/>
                     <View style={{paddingTop: 34, paddingHorizontal: 11}}>
                         <Button
-                            isDisabled={!this.state.started}
+                            isDisabled={!this.props.started}
                             disabledStyle={styles.main.buttonDisable}
                             onPress={() => navigate('Welcome')}
                             style={styles.main.button}
@@ -45,6 +44,14 @@ export class StartScreen extends Component {
     }
 
     render() {
-        return this.state.started ? this.renderRoot(Start) : this.renderRoot(Timer);
+        return this.props.started ? this.renderRoot(Start) : this.renderRoot(Timer);
     }
 }
+
+const mapStateToProps = (state) => ({
+    daysLeft: state.daysLeft
+});
+
+export const StartScreen = connect(
+    mapStateToProps
+)(_StartScreen);

@@ -1,4 +1,16 @@
+import React from 'react'
 import { AppRegistry } from 'react-native';
-import { Root } from './src';
+import { Provider } from 'react-redux'
 
-AppRegistry.registerComponent('VZDBTest', () => Root);
+import { Root } from './src';
+import configureStore from './src/store'
+
+const store = configureStore();
+
+const App = () => (
+    <Provider store={store}>
+        <Root />
+    </Provider>
+);
+
+AppRegistry.registerComponent('VZDBTest', () => App);

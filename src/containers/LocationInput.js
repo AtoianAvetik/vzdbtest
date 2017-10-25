@@ -2,33 +2,12 @@ import React, { Component } from 'react';
 import Button from 'apsl-react-native-button';
 import { Text, View, TextInput } from 'react-native';
 
-import * as api from '../services/api';
 import * as styles from '../styles/main';
 import { Background } from "./Background";
 
 export class LocationInput extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            eventDate: new Date('2017-11-29'),
-            daysLeft: 0
-        };
-
-    }
-
-    componentDidMount() {
-        api.get('date')
-            .then((data) => {
-                const currentDate = Date.parse(data.date.toString());
-                const daysLeft = this.calculateDaysLeft(currentDate);
-                this.setState({daysLeft});
-            })
-    }
-
-    calculateDaysLeft(currentDate) {
-        let timeDiff = this.state.eventDate.getTime() - currentDate;
-        return Math.floor(timeDiff / (1000 * 3600 * 24));
     }
 
     render() {
@@ -54,7 +33,7 @@ export class LocationInput extends Component {
                     </View>
                     <View style={{paddingTop: 30}}>
                         <Button
-                            onPress={() => navigate('StartScreen', {daysLeft: this.state.daysLeft})}
+                            onPress={() => navigate('StartScreen')}
                             style={styles.main.button}
                             disabledStyle={styles.main.buttonDisable}
                             textStyle={styles.main.buttonText}

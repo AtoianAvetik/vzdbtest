@@ -1,31 +1,45 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen'
+import { connect } from 'react-redux'
 
-import { store } from './store';
-import { StartStack, MainStack } from "./constans/routes";
+import * as api from './services/api';
+import { StartStack, MainStack } from "./constants/routes";
+import { setDaysLeft } from './actions/actions'
 
-export class Root extends Component {
-    constructor() {
-        super();
+class _Root extends Component {
+    static defaultProps = {
+        eventDate: new Date('2017-11-29')
+    };
+
+    constructor(props) {
+        super(props);
+
         this.state = {
-            started: false
-        };
+            started: true
+        }
     }
 
     componentDidMount() {
-        // do stuff while splash screen is shown
-        // After having done stuff (such as async tasks) hide the splash screen
-        setTimeout(() => {
-            SplashScreen.hide();
-        }, 2000)
+        api.get('date')
+            .then((data) => {
+                const currentDate = Date.parse(data.date.toString());
+                const daysLeft = this.calculateDaysLeft(currentDate);
+                this.props.setDaysLeft(daysLeft);
+                setTimeout(() => {
+                    SplashScreen.hide();
+                }, 2000)
+            })
+            .catch((err) => console.log('err:', err));
     }
+
+    calculateDaysLeft(currentDate) {
+        let timeDiff = this.props.eventDate.getTime() - currentDate;
+        return Math.floor(timeDiff / (1000 * 3600 * 24));
+    };
 
     renderRoot(ComponentToRender) {
         return (
-            <Provider store={store}>
-                <ComponentToRender />
-            </Provider>
+            <ComponentToRender daysLeft={this.props.daysLeft}/>
         );
     }
 
@@ -34,3 +48,18 @@ export class Root extends Component {
         return started ? this.renderRoot(MainStack) : this.renderRoot(StartStack);
     }
 }
+
+const mapStateToProps = (state) => ({
+    daysLeft: state.daysLeft
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    setDaysLeft(daysLeft) {
+        return dispatch(setDaysLeft(daysLeft));
+    }
+});
+
+export const Root = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(_Root);
