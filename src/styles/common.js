@@ -13,8 +13,19 @@ export const FONT_LINE_HEIGHTS = {
     text: 30,
     title: 37
 };
-export const FONT_NORMAL = 'TradeGothicLTStd';
-export const FONT_LIGHT = 'TradeGothicLTStd-Light';
-export const FONT_BOLD = 'TradeGothicLTStd-Bold';
-export const FONT_KOMIKA = 'KomikaAxis';
+export const FONTS = {
+    NORMAL: {
+        TG: 'TradeGothicLTStd',
+        HN: 'HelveticaNeue',
+        K: 'KomikaAxis'
+    },
+    LIGHT: {
+        TG: 'TradeGothicLTStd-Light',
+        HN: 'HelveticaNeue-Light'
+    },
+    BOLD: {
+        TG: 'TradeGothicLTStd-Bold',
+        HN: 'HelveticaNeue-Bold'
+    }
+};
 export const BORDER_RADIUS = 5;

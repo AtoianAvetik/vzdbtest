@@ -17,14 +17,14 @@ export const main = StyleSheet.create({
         fontSize: COMMON.FONT_SIZES.title,
         lineHeight: COMMON.FONT_LINE_HEIGHTS.title,
         textAlign: 'center',
-        fontFamily: COMMON.FONT_BOLD
+        fontFamily: COMMON.FONTS.BOLD.TG
     },
     text: {
         color: '#fff',
         fontSize: COMMON.FONT_SIZES.text,
         lineHeight: COMMON.FONT_LINE_HEIGHTS.text,
         textAlign: 'center',
-        fontFamily: COMMON.FONT_LIGHT,
+        fontFamily: COMMON.FONTS.LIGHT.HN,
         marginTop: 5
     },
     button: {
@@ -45,7 +45,7 @@ export const main = StyleSheet.create({
         color: '#ffffff',
         borderWidth: 0,
         fontSize: COMMON.FONT_SIZES.button,
-        fontFamily: COMMON.FONT_BOLD,
+        fontFamily: COMMON.FONTS.BOLD.TG,
     },
     inputContainer: {
         marginTop: 30,
@@ -64,7 +64,7 @@ export const main = StyleSheet.create({
     }
 });
 
-export const brin = StyleSheet.create({
+export const locationInput = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'rgba(58,186,255,0.85)',
@@ -92,7 +92,7 @@ export const start = StyleSheet.create({
     },
     textKomika: {
         fontSize: 23,
-        fontFamily: COMMON.FONT_KOMIKA,
+        fontFamily: COMMON.FONTS.NORMAL.K,
         lineHeight: 40,
         color: '#ffffff',
         textAlign: 'center',
@@ -104,17 +104,27 @@ export const start = StyleSheet.create({
       justifyContent: 'center'
     },
     timerText: {
-        fontWeight: 'bold',
+        fontFamily: COMMON.FONTS.BOLD.HN,
         fontSize: 20,
         color: '#ffffff'
     },
     timerBox: {
         backgroundColor: '#fff',
-        fontFamily: COMMON.FONT_LIGHT,
+        fontFamily: COMMON.FONTS.LIGHT.HN,
         color: COMMON.COLORS.blue,
+        lineHeight: 40,
         fontSize: 31,
         borderRadius: 12,
         paddingVertical: 5,
-        paddingHorizontal: 7
+        paddingHorizontal: 10
+    },
+    topBarButton: {
+        width: 22,
+        height: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 50,
+        borderWidth: 2,
+        borderColor: '#D8D8D8'
     }
 });

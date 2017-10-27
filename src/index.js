@@ -15,7 +15,7 @@ class _Root extends Component {
         super(props);
 
         this.state = {
-            started: true
+            started: false
         }
     }
 

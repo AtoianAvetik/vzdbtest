@@ -15,7 +15,7 @@ export class LocationInput extends Component {
 
         return(
             <Background>
-                <View style={styles.brin.container}>
+                <View style={styles.locationInput.container}>
                     <View>
                         <Text style={styles.main.title}>
                             Vul hier je Vestigings-nummer in

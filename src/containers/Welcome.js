@@ -15,7 +15,7 @@ export class Welcome extends Component {
 
         return(
             <Background>
-                <View style={styles.brin.container}>
+                <View style={styles.locationInput.container}>
                     <View>
                         <Text style={styles.main.title}>
                             Leuk dat jullie meedoen aan Kraanwaterdag 2017!
