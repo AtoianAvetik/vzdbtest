@@ -10,27 +10,6 @@ import { LocationInput } from '../containers/LocationInput';
 import { StartScreen } from '../containers/StartScreen';
 import { InfoScreen } from "../containers/InfoScreen";
 
-// export const StartStack = StackNavigator(
-//     {
-//         Welcome: {screen: Welcome},
-//         LocationInput: {screen: LocationInput},
-//         StartScreen: {
-//             screen: StartScreen,
-//             navigationOptions: {
-//                 header: <TopBar rightButton={<TopBarButton />} />,
-//             }
-//         }
-//     },
-//     {
-//         headerMode : 'float',
-//         mode : 'card ',
-//         navigationOptions: {
-//             header: <TopBar />,
-//         },
-//         transitionConfig: getSlideFromRightTransition
-//     }
-// );
-
 export const StartStack = StackNavigator(
     {
         Welcome: {screen: Welcome},
@@ -38,35 +17,20 @@ export const StartStack = StackNavigator(
         StartScreen: {
             screen: StartScreen,
             navigationOptions: {
-                header: ({navigate}) => (
-                        <TopBar
-                            rightButton={
-                                <TopBarButton
-                                    navigate={navigate}
-                                    options={{
-                                        type: "info",
-                                        style: styles.start.topBarButton,
-                                        nav: "InfoScreen"
-                                    }}/>
-                            }/>
-                    )
+                header: <TopBar rightButton={{
+                    type: "info",
+                    style: styles.start.topBarButton,
+                    nav: "InfoScreen"
+                }}/>,
             }
         },
         InfoScreen: {
             screen: InfoScreen,
             navigationOptions: {
-                header: ({navigate}) => (
-                    <TopBar
-                        rightButton={
-                            <TopBarButton
-                                navigate={navigate}
-                                options={{
-                                    type: "close",
-                                    style: styles.start.topBarButton,
-                                    nav: "StartScreen"
-                                }}/>
-                        }/>
-                )
+                header: <TopBar rightButton={{
+                    type: "close",
+                    style: styles.start.topBarButton
+                }}/>,
             }
         }
     },

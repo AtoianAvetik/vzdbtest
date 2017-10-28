@@ -11,6 +11,7 @@ import Svg,{
     Polyline,
     Defs
 } from 'react-native-svg';
+import { TopBarButton } from "../ui";
 
 export const Logo = () => (
     <Svg
@@ -51,7 +52,8 @@ export const TopBar = (props) => (
             <Logo />
         </View>
         <View style={{flex: 0.1}}>
-            {props.rightButton && props.rightButton}
+            {props.rightButton && props.rightButton.type === 'info' && <TopBarButton options={props.rightButton}/>}
+            {props.rightButton && props.rightButton.type === 'close' && <TopBarButton options={props.rightButton}/>}
         </View>
     </View>
 );

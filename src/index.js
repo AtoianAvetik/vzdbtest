@@ -3,6 +3,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { connect } from 'react-redux'
 
 import * as api from './services/api';
+import NavigatorService from './services/navigator';
 import { StartStack, MainStack } from "./constants/routes";
 import { setDaysLeft } from './actions/actions'
 
@@ -39,7 +40,11 @@ class _Root extends Component {
 
     renderRoot(ComponentToRender) {
         return (
-            <ComponentToRender daysLeft={this.props.daysLeft}/>
+            <ComponentToRender
+                daysLeft={this.props.daysLeft}
+                ref={navigatorRef => {
+                    NavigatorService.setContainer(navigatorRef);
+                }}/>
         );
     }
 
