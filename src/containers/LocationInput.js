@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'apsl-react-native-button';
 import { Text, View, TextInput } from 'react-native';
 
+import NavigatorService from '../services/navigator';
 import * as styles from '../styles/main';
 import { Background } from "./Background";
 
@@ -10,9 +11,13 @@ export class LocationInput extends Component {
         super(props);
     }
 
-    render() {
-        const {navigate} = this.props.navigation;
+    onNavigate() {
+        const {navigation} = this.props;
+        NavigatorService.replaceScreen('StartScreen');
+        // NavigatorService.navigate('StartScreen');
+    }
 
+    render() {
         return(
             <Background>
                 <View style={styles.locationInput.container}>
@@ -33,7 +38,7 @@ export class LocationInput extends Component {
                     </View>
                     <View style={{paddingTop: 30}}>
                         <Button
-                            onPress={() => navigate('StartScreen')}
+                            onPress={this.onNavigate.bind(this)}
                             style={styles.main.button}
                             disabledStyle={styles.main.buttonDisable}
                             textStyle={styles.main.buttonText}

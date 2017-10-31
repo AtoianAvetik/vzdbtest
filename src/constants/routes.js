@@ -4,13 +4,12 @@ import getSlideFromRightTransition from 'react-navigation-slide-from-right-trans
 
 import * as styles from '../styles/main';
 import { TopBar } from "../components/TopBar";
-import { TopBarButton } from "../ui";
 import { Welcome } from '../containers/Welcome';
 import { LocationInput } from '../containers/LocationInput';
 import { StartScreen } from '../containers/StartScreen';
 import { InfoScreen } from "../containers/InfoScreen";
 
-export const StartStack = StackNavigator(
+export const MainStack = StackNavigator(
     {
         Welcome: {screen: Welcome},
         LocationInput: {screen: LocationInput},
@@ -44,21 +43,16 @@ export const StartStack = StackNavigator(
     }
 );
 
-export const MainStack = StackNavigator(
-    {
-        StartScreen: {
-            screen: StartScreen,
-            navigationOptions: {
-                header: <TopBar rightButton={<TopBarButton />} />,
-            }
-        }
-    },
-    {
-        headerMode : 'float',
-        mode : 'card ',
-        navigationOptions: {
-            header: TopBar
-        },
-        transitionConfig: getSlideFromRightTransition
+const prevGetStateForActionHomeStack = MainStack.router.getStateForAction;
+MainStack.router.getStateForAction = (action, state) => {
+    if (state && action.type === 'ReplaceCurrentScreen') {
+        const routes = state.routes.slice(0, state.routes.length - 1);
+        routes.push(action);
+        return {
+            ...state,
+            routes,
+            index: routes.length - 1,
+        };
     }
-);
+    return prevGetStateForActionHomeStack(action, state);
+}

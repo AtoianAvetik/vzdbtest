@@ -1,5 +1,8 @@
 import { NavigationActions } from 'react-navigation';
-import type { NavigationParams, NavigationRoute } from 'react-navigation';
+import type {
+    NavigationParams,
+    NavigationRoute
+} from 'react-navigation';
 
 let _container; // eslint-disable-line
 
@@ -7,19 +10,27 @@ function setContainer(container: Object) {
     _container = container;
 }
 
-function reset(routeName: string, params?: NavigationParams) {
+function reset(routeName: string, key = null, params?: NavigationParams) {
     _container.dispatch(
         NavigationActions.reset({
             index: 0,
+            key: key,
             actions: [
                 NavigationActions.navigate({
                     type: 'Navigation/NAVIGATE',
                     routeName,
-                    params,
+                    params
                 }),
             ],
         }),
     );
+}
+
+function replaceScreen(routeName: string) {
+    _container.dispatch({
+        type: 'ReplaceCurrentScreen',
+        routeName: routeName
+    });
 }
 
 function navigate(routeName: string, params?: NavigationParams) {
@@ -35,6 +46,7 @@ function navigate(routeName: string, params?: NavigationParams) {
 function back(key?: string) {
     _container.dispatch(
         NavigationActions.back({
+            type: "Navigation/BACK",
             key
         }),
     );
@@ -70,4 +82,5 @@ export default {
     reset,
     back,
     getCurrentRoute,
+    replaceScreen
 };

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Button from 'apsl-react-native-button';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux'
 
 import * as styles from '../styles/main';
+import NavigatorService from '../services/navigator';
 import { Background } from "./Background";
 import { Timer } from "../components/Timer";
 import { Start } from "../components/Start";
@@ -25,21 +26,23 @@ class _StartScreen extends Component {
         const {navigate} = this.props.navigation;
 
         return (
-            <Background>
-                <View style={styles.start.container}>
-                    <ComponentToRender daysLeft={this.props.daysLeft}/>
-                    <View style={{paddingTop: 34, paddingHorizontal: 11}}>
-                        <Button
-                            isDisabled={!this.props.started}
-                            disabledStyle={styles.main.buttonDisable}
-                            onPress={() => navigate('Welcome')}
-                            style={styles.main.button}
-                            textStyle={styles.main.buttonText}
-                            children={'Volgende'}
-                        />
+            <ScrollView>
+                <Background>
+                    <View style={styles.start.container}>
+                        <ComponentToRender daysLeft={this.props.daysLeft}/>
+                        <View style={{paddingTop: 34, paddingHorizontal: 11}}>
+                            <Button
+                                isDisabled={!this.props.started}
+                                disabledStyle={styles.main.buttonDisable}
+                                onPress={() => navigate('Welcome')}
+                                style={styles.main.button}
+                                textStyle={styles.main.buttonText}
+                                children={'Volgende'}
+                            />
+                        </View>
                     </View>
-                </View>
-            </Background>
+                </Background>
+            </ScrollView>
         );
     }
 
