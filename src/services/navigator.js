@@ -33,6 +33,12 @@ function replaceScreen(routeName: string) {
     });
 }
 
+function removePrevScreen() {
+    _container.dispatch({
+        type: 'RemovePrevFromStack'
+    });
+}
+
 function navigate(routeName: string, params?: NavigationParams) {
     _container.dispatch(
         NavigationActions.navigate({
@@ -82,5 +88,6 @@ export default {
     reset,
     back,
     getCurrentRoute,
-    replaceScreen
+    replaceScreen,
+    removePrevScreen
 };
