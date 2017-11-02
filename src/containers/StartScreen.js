@@ -20,6 +20,7 @@ class _StartScreen extends Component {
     componentWillMount() {
         const started = this.props.daysLeft < 0;
         this.setState({started});
+        NavigatorService.removePrevScreen();
     }
 
     renderRoot(ComponentToRender) {

@@ -10,6 +10,21 @@ function setContainer(container: Object) {
     _container = container;
 }
 
+function resetRoutes(index, routes) {
+    const actions = routes.map((el) => {
+        return NavigationActions.navigate({
+                    type: 'Navigation/NAVIGATE',
+                    routeName: el
+                })
+    });
+    _container.dispatch(
+        NavigationActions.reset({
+            index: index,
+            actions,
+        }),
+    );
+}
+
 function reset(routeName: string, key = null, params?: NavigationParams) {
     _container.dispatch(
         NavigationActions.reset({
@@ -89,5 +104,6 @@ export default {
     back,
     getCurrentRoute,
     replaceScreen,
-    removePrevScreen
+    removePrevScreen,
+    resetRoutes
 };
