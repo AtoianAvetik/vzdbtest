@@ -1,6 +1,7 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
+import TransitionConfiguration from './transitions';
 
 import * as styles from '../styles/main';
 import { TopBar } from "../components/TopBar";
@@ -39,7 +40,7 @@ export const MainStack = StackNavigator(
         navigationOptions: {
             header: <TopBar />,
         },
-        transitionConfig: getSlideFromRightTransition
+        transitionConfig: TransitionConfiguration
     }
 );
 

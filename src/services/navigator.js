@@ -48,9 +48,10 @@ function replaceScreen(routeName: string) {
     });
 }
 
-function removePrevScreen() {
+function removePrevScreen(params?: NavigationParams) {
     _container.dispatch({
-        type: 'RemovePrevFromStack'
+        type: 'RemovePrevFromStack',
+        params
     });
 }
 
