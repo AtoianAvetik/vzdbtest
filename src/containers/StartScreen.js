@@ -4,7 +4,6 @@ import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux'
 
 import * as styles from '../styles/main';
-import NavigatorService from '../services/navigator';
 import { Background } from "./Background";
 import { Timer } from "../components/Timer";
 import { Start } from "../components/Start";
@@ -13,14 +12,13 @@ class _StartScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            started: false
+            started: true
         };
     }
 
-    componentWillMount() {
-        const started = this.props.daysLeft < 0;
-        this.setState({started});
-        NavigatorService.removePrevScreen();
+    componentDidMount() {
+        // const started = this.props.daysLeft <= 0;
+        // this.setState({started});
     }
 
     renderRoot(ComponentToRender) {
@@ -33,9 +31,9 @@ class _StartScreen extends Component {
                         <ComponentToRender daysLeft={this.props.daysLeft}/>
                         <View style={{paddingTop: 34, paddingHorizontal: 11}}>
                             <Button
-                                isDisabled={!this.props.started}
+                                isDisabled={!this.state.started}
                                 disabledStyle={styles.main.buttonDisable}
-                                onPress={() => navigate('Welcome')}
+                                onPress={() => navigate('StartStack')}
                                 style={styles.main.button}
                                 textStyle={styles.main.buttonText}
                                 children={'Volgende'}
@@ -48,7 +46,7 @@ class _StartScreen extends Component {
     }
 
     render() {
-        return this.props.started ? this.renderRoot(Start) : this.renderRoot(Timer);
+        return this.state.started ? this.renderRoot(Start) : this.renderRoot(Timer);
     }
 }
 

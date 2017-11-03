@@ -13,7 +13,7 @@ export class LocationInput extends Component {
 
     onNavigate() {
         const {navigate} = this.props.navigation;
-        NavigatorService.navigate('StartScreen')
+        NavigatorService.navigate('StartScreen', {disableBackFromScreen: true})
     }
 
     render() {

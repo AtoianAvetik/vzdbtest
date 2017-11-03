@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import * as api from './services/api';
 import NavigatorService from './services/navigator';
-import { MainStack } from "./constants/routes";
+import { RootStack } from "./navigation/routes";
 import { setDaysLeft } from './actions/actions'
 
 class _Root extends Component {
@@ -27,7 +27,7 @@ class _Root extends Component {
                 const daysLeft = this.calculateDaysLeft(currentDate);
                 this.props.setDaysLeft(daysLeft);
                 if ( this.state.started ) {
-                    NavigatorService.reset('StartScreen');
+                    NavigatorService.reset('StartStack');
                 }
                 setTimeout(() => {
                     SplashScreen.hide();
@@ -38,7 +38,7 @@ class _Root extends Component {
 
     calculateDaysLeft(currentDate) {
         let timeDiff = this.props.eventDate.getTime() - currentDate;
-        return Math.floor(timeDiff / (1000 * 3600 * 24));
+        return Math.ceil(timeDiff / (1000 * 3600 * 24));
     };
 
     renderRoot(ComponentToRender) {
@@ -52,7 +52,7 @@ class _Root extends Component {
     }
 
     render() {
-        return this.renderRoot(MainStack);
+        return this.renderRoot(RootStack);
     }
 }
 
