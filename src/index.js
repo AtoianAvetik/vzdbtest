@@ -16,7 +16,7 @@ class _Root extends Component {
         super(props);
 
         this.state = {
-            started: false
+            started: true
         }
     }
 
@@ -26,9 +26,6 @@ class _Root extends Component {
                 const currentDate = Date.parse(data.date.toString());
                 const daysLeft = this.calculateDaysLeft(currentDate);
                 this.props.setDaysLeft(daysLeft);
-                if ( this.state.started ) {
-                    NavigatorService.reset('StartStack');
-                }
                 setTimeout(() => {
                     SplashScreen.hide();
                 }, 1000)
@@ -52,7 +49,7 @@ class _Root extends Component {
     }
 
     render() {
-        return this.renderRoot(RootStack);
+        return this.renderRoot(RootStack(this.state.started));
     }
 }
 

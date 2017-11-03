@@ -128,3 +128,23 @@ export const start = StyleSheet.create({
         borderColor: '#D8D8D8'
     }
 });
+
+export const slider = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#CAEFFF',
+        paddingVertical: 36,
+        paddingHorizontal: 26
+    },
+    slide: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#9DD6EB',
+    },
+    text: {
+        color: '#fff',
+        fontSize: 30,
+        fontWeight: 'bold',
+    }
+});
