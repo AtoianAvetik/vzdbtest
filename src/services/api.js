@@ -1,3 +1,5 @@
+import React from 'react';
+
 const url = 'https://test.zoek-de-bron.pindrop.nl/';
 const headers = {
     'Content-Type': 'application/json',
@@ -15,13 +17,19 @@ const checkStatus = (response) => {
     }
 };
 
+function setGetParams(paramsObject){
+    return {headers: headers, body: JSON.stringify({paramsObject})};
+}
+
 const parseJSON = (response) => response.json();
 
-export const get = (path) => (
-    fetch(url + path, { headers })
-        .then(checkStatus)
-        .then(parseJSON)
-);
+export const get = (path, params?) => {
+    const options = params ? setGetParams(params) : headers;
+
+    return fetch(url + path, {options})
+            .then(checkStatus)
+            .then(parseJSON)
+};
 
 export const post = (path, data) => (
     fetch(url + path, {

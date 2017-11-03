@@ -5,7 +5,7 @@ import * as styles from '../styles/main';
 import { Background } from "./Background";
 
 export const InfoScreen = () => (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{minHeight: "100%"}}>
         <Background>
             <View style={styles.locationInput.container}>
                 <View>

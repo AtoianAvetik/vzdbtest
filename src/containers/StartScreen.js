@@ -25,7 +25,7 @@ class _StartScreen extends Component {
         const {navigate} = this.props.navigation;
 
         return (
-            <ScrollView>
+            <ScrollView contentContainerStyle={{minHeight: "100%"}}>
                 <Background>
                     <View style={styles.start.container}>
                         <ComponentToRender daysLeft={this.props.daysLeft}/>
