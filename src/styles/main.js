@@ -138,13 +138,33 @@ export const slider = StyleSheet.create({
     },
     slide: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#9DD6EB',
+        paddingTop: 15,
+        paddingHorizontal: 20,
+    },
+    title: {
+        fontSize: COMMON.FONT_SIZES.button,
+        color: COMMON.COLORS.darkblue,
+        fontFamily: COMMON.FONTS.NORMAL.K,
+        textAlign: 'center',
+        marginBottom: 15
     },
     text: {
-        color: '#fff',
-        fontSize: 30,
-        fontWeight: 'bold',
+        fontFamily: COMMON.FONTS.LIGHT.HN,
+        color: COMMON.COLORS.darkblue,
+        fontSize: COMMON.FONT_SIZES.text,
+        textAlign: 'center'
+    },
+    descriptionContainer: {
+        flex: 0.6
+    },
+    imageContainer: {
+        flex: 1,
+        paddingBottom: 50
+    },
+    image: {
+        flex: 1,
+        resizeMode: 'contain'
     }
 });

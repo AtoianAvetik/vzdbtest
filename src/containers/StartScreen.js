@@ -33,7 +33,7 @@ class _StartScreen extends Component {
                             <Button
                                 isDisabled={!this.state.started}
                                 disabledStyle={styles.main.buttonDisable}
-                                onPress={() => navigate('StartStack')}
+                                onPress={() => navigate('SliderScreen')}
                                 style={styles.main.button}
                                 textStyle={styles.main.buttonText}
                                 children={'Volgende'}

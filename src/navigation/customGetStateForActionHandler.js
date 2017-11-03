@@ -22,8 +22,8 @@ export default function customGetStateForActionHandler(action, state, prevGetSta
     }
     // back to seted screen
     if (action.type === "Navigation/BACK" && state && state.routes[state.index].params && state.routes[state.index].params.backScreen) {
-        const newIndex = state.routes.findIndex((el, i, arr) => {
-            return el.routeName === arr[state.index].params.backScreen;
+        const newIndex = state.routes.findIndex((el) => {
+            return el.routeName === state.routes[state.index].params.backScreen;
         });
         const newRoutes = state.routes.filter((r, i) => i <= newIndex);
         return prevGetStateForActionStack(action, { index: newIndex, routes: newRoutes });
