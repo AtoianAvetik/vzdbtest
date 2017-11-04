@@ -8,11 +8,10 @@ const headers = {
 
 
 const checkStatus = (response) => {
-    console.warn(JSON.stringify(response))
     if (response.status >= 200 && response.status < 300) {
         return response;
     } else {
-        const error = new Error(response.statusText)
+        const error = new Error(response.statusText);
         error.response = response;
         throw error;
     }
@@ -33,10 +32,12 @@ function request(params) {
     let body;
     const headers = params.headers || headers;
 
-    if (['GET', 'DELETE'].indexOf(method) > -1 && params.data)
-        qs = '?' + getQueryString(params.data);
-    else // POST or PUT
-        body = JSON.stringify(params.data);
+    if ( params.data ) {
+        if (['GET', 'DELETE'].indexOf(method) > -1)
+            qs = '?' + getQueryString(params.data);
+        else // POST or PUT
+            body = JSON.stringify(params.data);
+    }
 
     const url = apiUrl + params.path + qs;
 
