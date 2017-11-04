@@ -1,6 +1,6 @@
 import React from 'react';
 
-const url = 'https://test.zoek-de-bron.pindrop.nl/';
+const apiUrl = 'https://test.zoek-de-bron.pindrop.nl/';
 const headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json'
@@ -8,6 +8,7 @@ const headers = {
 
 
 const checkStatus = (response) => {
+    console.warn(JSON.stringify(response))
     if (response.status >= 200 && response.status < 300) {
         return response;
     } else {
@@ -17,26 +18,36 @@ const checkStatus = (response) => {
     }
 };
 
-function setGetParams(paramsObject){
-    return {headers: headers, body: JSON.stringify({paramsObject})};
-}
-
 const parseJSON = (response) => response.json();
 
-export const get = (path, params?) => {
-    const options = params ? setGetParams(params) : headers;
+function getQueryString(params) {
+    const esc = encodeURIComponent;
+    return Object.keys(params)
+        .map(k => esc(k) + '=' + esc(params[k]))
+        .join('&');
+}
 
-    return fetch(url + path, {options})
+function request(params) {
+    const method = params.method || 'GET';
+    let qs = '';
+    let body;
+    const headers = params.headers || headers;
+
+    if (['GET', 'DELETE'].indexOf(method) > -1 && params.data)
+        qs = '?' + getQueryString(params.data);
+    else // POST or PUT
+        body = JSON.stringify(params.data);
+
+    const url = apiUrl + params.path + qs;
+
+    return fetch(url, { method, headers, body })
             .then(checkStatus)
-            .then(parseJSON)
-};
+            .then(parseJSON);
+}
 
-export const post = (path, data) => (
-    fetch(url + path, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(data)
-    })
-        .then(checkStatus)
-        .then(parseJSON)
-);
+export default {
+    get: (path, data = null, headers = null) => request({path, data, headers, method: 'GET'}),
+    post: (path, data = null, headers = null) => request({path, data, headers, method: 'POST'}),
+    put: params => request(Object.assign({ method: 'PUT' }, params)),
+    delete: params => request(Object.assign({ method: 'DELETE' }, params))
+};

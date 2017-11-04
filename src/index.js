@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SplashScreen from 'react-native-splash-screen'
 import { connect } from 'react-redux'
 
-import * as api from './services/api';
+import api from './services/api';
 import NavigatorService from './services/navigator';
 import { RootStack } from "./navigation/routes";
 import { setDaysLeft } from './actions/actions'
