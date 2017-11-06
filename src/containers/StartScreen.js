@@ -11,14 +11,6 @@ import { Start } from "../components/Start";
 class _StartScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            started: true
-        };
-    }
-
-    componentDidMount() {
-        // const started = this.props.daysLeft <= 0;
-        // this.setState({started});
     }
 
     renderRoot(ComponentToRender) {
@@ -31,7 +23,7 @@ class _StartScreen extends Component {
                         <ComponentToRender daysLeft={this.props.daysLeft}/>
                         <View style={{paddingTop: 34, paddingHorizontal: 11}}>
                             <Button
-                                isDisabled={!this.state.started}
+                                isDisabled={!this.props.appState}
                                 disabledStyle={styles.main.buttonDisable}
                                 onPress={() => navigate('SliderScreen')}
                                 style={styles.main.button}
@@ -46,12 +38,13 @@ class _StartScreen extends Component {
     }
 
     render() {
-        return this.state.started ? this.renderRoot(Start) : this.renderRoot(Timer);
+        return this.props.appState ? this.renderRoot(Start) : this.renderRoot(Timer);
     }
 }
 
 const mapStateToProps = (state) => ({
-    daysLeft: state.daysLeft
+    daysLeft: state.appState.daysLeft,
+    appState: state.appState.event
 });
 
 export const StartScreen = connect(

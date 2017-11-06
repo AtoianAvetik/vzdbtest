@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
-import * as types from '../constants/actionTypes';
+import * as types from './actionTypes';
 
-export const setDaysLeft = (daysLeft) => (
-    createAction(types.SET_DAYS_LEFT)(daysLeft)
+export const setAppState = (appState) => (
+    createAction(types.SET_APP_STATE)(appState)
 );
