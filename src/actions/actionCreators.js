@@ -1,5 +1,5 @@
 import { createAsyncCreator } from '../services/asyncCreators';
-import * as api from '../services/api';
+import api from '../services/api';
 import * as types from './actionTypes';
 
 export const setAppState = () => (

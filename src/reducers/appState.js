@@ -5,7 +5,7 @@ const eventDate = new Date('2017-11-29');
 export const appState = (state = {event: true, state: 'event', daysLeft: 0}, { type, payload }) => {
     switch (type) {
         case types.FETCH_CURRENT_DATE:
-            return 'pending';
+            return state;
         case types.FETCH_CURRENT_DATE_COMPLETE:
             const currentDate = Date.parse(payload.date.toString());
             state.daysLeft = calculateDaysLeft(currentDate);
