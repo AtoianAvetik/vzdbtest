@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'apsl-react-native-button';
 import { Text, View, TextInput, ScrollView, Keyboard } from 'react-native';
 
-import * as api from '../services/api';
+import api from '../services/api';
 import * as styles from '../styles/main';
 import NavigatorService from '../services/navigator';
 import { Background } from "./Background";
@@ -34,13 +34,11 @@ export class LocationInput extends Component {
 
     onLocationNumberValid(school) {
         this.setState({school, valid: true});
-        console.warn(this.state.school)
         Keyboard.dismiss();
     }
 
     onLocationNumberInvalid(error) {
         this.setState({school: null, valid: false});
-        console.warn(error)
         // this._storage.remove('school');
     }
 
