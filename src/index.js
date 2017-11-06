@@ -19,10 +19,9 @@ class _Root extends Component {
     componentDidMount() {
         Storage.get('school')
             .then((res) => {
-                if ( res )
-                    this.setState({started: true});
                 this.props.setAppState()
                     .then(() => {
+                        res && this.setState({started: true});
                         setTimeout(() => {
                             SplashScreen.hide();
                         }, 2000)
