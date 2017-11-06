@@ -3,6 +3,7 @@ import Button from 'apsl-react-native-button';
 import { Text, View, TextInput, ScrollView, Keyboard } from 'react-native';
 
 import api from '../services/api';
+import Storage from '../services/storage';
 import * as styles from '../styles/main';
 import NavigatorService from '../services/navigator';
 import { Background } from "./Background";
@@ -18,7 +19,6 @@ export class LocationInput extends Component {
     }
 
     onNavigate() {
-        const {navigate} = this.props.navigation;
         NavigatorService.navigate('StartScreen', {disableBackFromScreen: true})
     }
 
@@ -39,7 +39,7 @@ export class LocationInput extends Component {
 
     onLocationNumberInvalid(error) {
         this.setState({school: null, valid: false});
-        // this._storage.remove('school');
+        Storage.remove('school');
     }
 
     onSubmit(){
@@ -54,7 +54,10 @@ export class LocationInput extends Component {
         //             }
         //         });
         // }
-        this.onNavigate();
+        Storage.store('school', this.state.school)
+            .then(() => {
+                this.onNavigate();
+            });
     }
 
     render() {

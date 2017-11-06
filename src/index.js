@@ -3,6 +3,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { connect } from 'react-redux'
 
 import NavigatorService from './services/navigator';
+import Storage from './services/storage';
 import { RootStack } from "./navigation/routes";
 import { setAppState } from './actions/actionCreators'
 
@@ -16,10 +17,17 @@ class _Root extends Component {
     }
 
     componentDidMount() {
-        this.props.setAppState();
-        setTimeout(() => {
-            SplashScreen.hide();
-        }, 2000)
+        Storage.get('school')
+            .then((res) => {
+                if ( res )
+                    this.setState({started: true});
+                this.props.setAppState()
+                    .then(() => {
+                        setTimeout(() => {
+                            SplashScreen.hide();
+                        }, 2000)
+                    });
+            });
     }
 
     renderRoot(ComponentToRender) {
@@ -37,7 +45,7 @@ class _Root extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setAppState() {
+    async setAppState() {
         return dispatch(setAppState());
     }
 });
