@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import Button from 'apsl-react-native-button';
-import { Text, View, TextInput, ScrollView, Keyboard } from 'react-native';
+import {
+    Text,
+    View,
+    TextInput,
+    ScrollView,
+    Keyboard
+} from 'react-native';
+
 
 import api from '../services/api';
 import Storage from '../services/storage';
@@ -13,8 +20,12 @@ export class LocationInput extends Component {
         super(props);
 
         this.state = {
-            valid: false,
-            school: null
+            form: {
+                valid: false,
+                dirty: false
+            },
+            school: null,
+            checked: true
         }
     }
 
@@ -23,22 +34,28 @@ export class LocationInput extends Component {
     }
 
     isLocationNumberValid(value) {
+        let form = {
+            dirty: value.length > 0
+        };
+        this.setState({form});
         api.get('location_number', {'number': value})
             .then((school) =>{
-                this.onLocationNumberValid(school);
+                form['valid'] = true;
+                this.onLocationNumberValid(school, form);
             })
             .catch((error) => {
-                this.onLocationNumberInvalid(error);
+                form['valid'] = false;
+                this.onLocationNumberInvalid(error, form);
             });
     }
 
-    onLocationNumberValid(school) {
-        this.setState({school, valid: true});
+    onLocationNumberValid(school, form) {
+        this.setState({school, form});
         Keyboard.dismiss();
     }
 
-    onLocationNumberInvalid(error) {
-        this.setState({school: null, valid: false});
+    onLocationNumberInvalid(error, form) {
+        this.setState({school: null, form});
         Storage.remove('school');
     }
 
@@ -67,10 +84,10 @@ export class LocationInput extends Component {
                     <View style={styles.locationInput.container}>
                         <View>
                             <Text style={styles.main.title}>
-                                Vul hier je Vestigings-nummer in
+                                Vul hier het BRIN-nummer van jouw basisschool in.
                             </Text>
                         </View>
-                        <View style={{flex: 1}}>
+                        <View style={{flex: 1, marginBottom: 20}}>
                             <View style={styles.main.inputContainer}>
                                 <TextInput
                                     underlineColorAndroid='transparent'
@@ -81,13 +98,24 @@ export class LocationInput extends Component {
                                     style={styles.main.input} />
                             </View>
                         </View>
+                        {this.state.form.valid &&
                         <View style={{flex: 1}}>
-                            <Text>1</Text>
+                            <Text style={[styles.locationInput.text, {fontSize: 16}]}>Dit Vestigings-nummer is gekoppeld aan:</Text>
+                            <Text style={[styles.locationInput.text, {fontWeight: 'bold', fontSize: 16}]}>{this.state.school.name}</Text>
+                            <Text style={[styles.locationInput.text, {fontSize: 16}]}>Klopt dit?</Text>
                         </View>
+                        }
+
+                        {(this.state.form.dirty && !this.state.form.valid) &&
+                        <View style={{flex: 1}}>
+                            <Text style={styles.locationInput.text}>Dit BRIN-nummer komt niet overeen met de lijst van aangemelde scholen. Heb je het volledige BRIN + vestigingsnummer ingevuld, bijvoorbeeld: 12AB00?</Text>
+                            <Text style={styles.locationInput.text}>Let op: als jouw school niet binnen het Vitens verzorgingsgebied ligt, of je hebt jouw klas niet van tevoren aangemeld, dan kun je helaas niet meedoen.</Text>
+                        </View>
+                        }
                         <View style={{paddingTop: 30}}>
                             <Button
                                 onPress={this.onSubmit.bind(this)}
-                                isDisabled={!this.state.valid}
+                                isDisabled={!this.state.checked}
                                 style={styles.main.button}
                                 disabledStyle={styles.main.buttonDisable}
                                 textStyle={styles.main.buttonText}

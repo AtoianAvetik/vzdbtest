@@ -11,7 +11,7 @@ class LocalStorage {
 
     async get(key: string): Promise<any> {
         await this.fetchStorageData();
-        return this.data[key];
+        return this.data[key] ? this.data[key] : null;
     }
 
     async store(key: string, value: any): Promise<any> {

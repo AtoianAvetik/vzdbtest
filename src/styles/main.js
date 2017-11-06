@@ -60,7 +60,8 @@ export const main = StyleSheet.create({
         fontSize: 20,
         lineHeight: 20,
         borderColor: 'transparent',
-        borderWidth: 0
+        borderWidth: 0,
+        color: COMMON.COLORS.secondary
     }
 });
 
@@ -69,7 +70,14 @@ export const locationInput = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgba(58,186,255,0.85)',
         paddingVertical: 36,
-        paddingHorizontal: 26
+        paddingHorizontal: 20
+    },
+    text: {
+        color: '#ffffff',
+        textAlign: 'center',
+        fontSize: 14,
+        fontFamily: COMMON.FONTS.NORMAL.HN,
+        lineHeight: 25
     }
 });
 
