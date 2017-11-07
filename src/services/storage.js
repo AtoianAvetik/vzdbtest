@@ -2,9 +2,11 @@ import { AsyncStorage } from 'react-native';
 
 class LocalStorage {
     constructor() {
-        // this.get = this.get.bind(this);
-        // this.store = this.store.bind(this);
-        // this.remove = this.remove.bind(this);
+        this.actions = {
+            get: AsyncStorage.getItem.bind(this),
+            set: AsyncStorage.setItem.bind(this),
+            remove: AsyncStorage.removeItem.bind(this)
+        }
     }
 
     async parseJSON(response): Promise<any> {
@@ -12,39 +14,21 @@ class LocalStorage {
     }
 
     async get(key: string): Promise<any> {
-        const data = await this.fetchStorageData(key);
+        const data = await this.storageAction('get', key);
         return data ? data : null;
     }
 
     async store(key: string, value: any): Promise<any> {
-        await this.setStorageData(key, value);
+        return this.storageAction('set', key, JSON.stringify(value));
     }
 
     async remove(key: string): Promise<any> {
-        await this.removeStorageData(key);
+        return this.storageAction('remove', key);
     }
 
-    async fetchStorageData(key) {
+    async storageAction(action: string, key, value?) {
         try {
-            return await AsyncStorage.getItem(key).then(this.parseJSON);
-        } catch (error) {
-            console.log('no storage supported');
-            throw error;
-        }
-    }
-
-    async setStorageData(key, value) {
-        try {
-            return await AsyncStorage.setItem(key, JSON.stringify(value));
-        } catch (error) {
-            console.log('no storage supported');
-            throw error;
-        }
-    }
-
-    async removeStorageData(key) {
-        try {
-            return await AsyncStorage.setItem(key);
+            return await this.actions[action](key, value).then(this.parseJSON);
         } catch (error) {
             console.log('no storage supported');
             throw error;
