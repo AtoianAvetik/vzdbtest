@@ -5,7 +5,8 @@ class LocalStorage {
         this.actions = {
             get: AsyncStorage.getItem.bind(this),
             set: AsyncStorage.setItem.bind(this),
-            remove: AsyncStorage.removeItem.bind(this)
+            remove: AsyncStorage.removeItem.bind(this),
+            getAll: AsyncStorage.getAllKeys.bind(this)
         }
     }
 
@@ -24,6 +25,15 @@ class LocalStorage {
 
     async remove(key: string): Promise<any> {
         return this.storageAction('remove', key);
+    }
+
+    async getAllItems(prefix = ''): Promise<any> {
+        return this.actions['getAll']()
+            .then((keys: string[]) => {
+                const fetchKeys = keys.filter((k) => { return k.startsWith(prefix); });
+                return AsyncStorage.multiGet(fetchKeys);
+            })
+            .then(this.parseJSON);
     }
 
     async storageAction(action: string, key, value?) {
