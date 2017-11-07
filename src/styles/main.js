@@ -72,6 +72,11 @@ export const locationInput = StyleSheet.create({
         paddingVertical: 36,
         paddingHorizontal: 20
     },
+    linearGradient: {
+        flex: 1,
+        paddingVertical: 36,
+        paddingHorizontal: 20
+    },
     text: {
         color: '#ffffff',
         textAlign: 'center',
