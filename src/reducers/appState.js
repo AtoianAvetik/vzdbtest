@@ -24,6 +24,12 @@ export const appState = (state = {event: true, state: 'event', daysLeft: 0}, { t
                     break;
             }
             return state;
+        case types.SET_APP_STATE:
+            return {
+                ...state,
+                state: payload,
+                event: (payload === 'event')
+            };
         default:
             return state;
     }

@@ -7,7 +7,7 @@ import {
     ScrollView,
     Keyboard
 } from 'react-native';
-
+import { CheckBox } from 'react-native-elements'
 
 import api from '../services/api';
 import Storage from '../services/storage';
@@ -84,7 +84,7 @@ export class LocationInput extends Component {
                     <View style={styles.locationInput.container}>
                         <View>
                             <Text style={styles.main.title}>
-                                Vul hier het BRIN-nummer van jouw basisschool in.
+                                Vul hier het BRIN + vestigingsnummer van jouw basisschool in:
                             </Text>
                         </View>
                         <View style={{flex: 1, marginBottom: 20}}>
@@ -105,7 +105,12 @@ export class LocationInput extends Component {
                             <Text style={[styles.locationInput.text, {fontSize: 16}]}>Klopt dit?</Text>
                         </View>
                         }
-
+                        <CheckBox
+                            title='Ja, dit is mijn basisschool'
+                            center
+                            checked={this.state.checked}
+                            onPress={() => {this.setState({checked: !this.state.checked})}}
+                        />
                         {(this.state.form.dirty && !this.state.form.valid) &&
                         <View style={{flex: 1}}>
                             <Text style={styles.locationInput.text}>Dit BRIN-nummer komt niet overeen met de lijst van aangemelde scholen. Heb je het volledige BRIN + vestigingsnummer ingevuld, bijvoorbeeld: 12AB00?</Text>

@@ -24,7 +24,12 @@ export class Welcome extends Component {
                         </View>
                         <View style={{paddingTop: 27,flex: 1}}>
                             <Text style={styles.main.text}>
-                                Doe eerst de Kraanwaterdag-quiz via het digibord. Het linkje ontvang je per mail. Speel daarna met deze app de Diep Onder de Grond-challenge met jouw klas. Via GPS ga je op het schoolplein op zoek naar spetterende prijzen. De hoofdprijs is een kraanwatertappunt voor op het schoolplein! En elke klas die meedoet wint iets leuks.
+                                Speel eerst de Kraanwaterdag-quiz via het digibord, gepresenteerd door YouTuber Nanne Meijer!
+                                De link van deze quiz ontvang je op dinsdag 28 november per mail. Na de quiz gaan jullie het schoolplein op.
+                                Hier spelen jullie de Zoek de waterbron-challenge met de hele klas of in groepjes.
+                                Per groepje heb je één smartphone of tablet met deze app nodig.
+                                Met de Zoek de waterbron-app gaan jullie op het schoolplein op zoek naar spetterende prijzen.
+                                De hoofdprijs is een watertappunt voor op het schoolplein! En elke klas die meedoet wint iets leuks.
                             </Text>
                         </View>
                         <View style={{paddingTop: 30}}>
